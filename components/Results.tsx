@@ -30,6 +30,7 @@ export default function Results({ data }: ResultsProps) {
   };
 
   const { summary, data: analysisData, output_files } = data;
+  const downloadFiles: Record<string, string> = output_files ?? {};
 
   return (
     <div className="space-y-6">
@@ -215,10 +216,10 @@ export default function Results({ data }: ResultsProps) {
       <div className="bg-slate-50 rounded-lg border border-slate-200 p-6">
         <h3 className="text-lg font-semibold text-slate-900 mb-4">📥 Download Results</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {Object.entries(output_files).map(([key, filename]) => (
+          {Object.entries(downloadFiles).map(([key, filename]) => (
             <button
               key={key}
-              onClick={() => handleDownload(filename as string, filename as string)}
+              onClick={() => handleDownload(filename, filename)}
               disabled={downloadingFile === filename}
               className="flex items-center justify-between p-3 bg-white border border-slate-300 rounded-lg hover:border-primary-500 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
